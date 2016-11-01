@@ -1,27 +1,5 @@
 $(document).ready(function() {
 
-var number = 121;
-
-function run() {
-	counter = setInterval(decrement, 1000);
-}
-
-function decrement() {
-	number--;
-	$('#show-number').html('<h2>' + number + '<h2>');
-
-	if (number === 0) {
-		stop();
-		alert('Times Up!');
-	}
-}
-
-function stop() {
-	clearInterval(counter);
-}
-
-run();
-
 	var questions = [{
 		question: "What was the first thing God created?",
 		choices: [" Anmals", " Man", " Heavens and Earth"],
@@ -30,6 +8,10 @@ run();
 		question: "Noah took how many animals on the ark?",
 		choices: [" 2 by 2", " 20", " 4 by 4"],
 		correctAnswer: 0
+	},	{
+		question: "What did Jesus use to turn into wine?",
+		choices: [" Tears", " Water", " Urine"],
+		correctAnswer: 1
 	},	{
 		question: "Who did David defeat with a slingshot?",
 		choices: [" Saul", " Peter", " Goliath"],
@@ -43,6 +25,8 @@ run();
 	var questionCounter = 0;
 	var selections = [];
 	var quiz = $("#quiz");
+	var questionClass = $(document).find(".quizContainer > .question");
+    var choiceList = $(document).find(".quizContainer > .choiceList");
 
 	displayNext();
 
@@ -122,14 +106,15 @@ run();
 
 		var numCorrect = 0;
 		var inCorrect = 0;
+		var unAnswered = 0;
 		for (var i = 0; i < selections.length; i++) {
 			if (selections[i] == questions[i].correctAnswer) {
-				numCorrect++; 
-			}
-			else if (inCorrect++);
+				(numCorrect++); 
+			} else if (inCorrect++);
+			else if (unAnswered++);
 		}
 
-		score.append("<h3>You got " + numCorrect + " correct and " + inCorrect + " wrong!<h3>");
+		score.append("<h3>Correct: " + numCorrect + " <br>Incorrect: " + inCorrect + "<br>Unanswered: " + unAnswered + "</h3");
 
 		return score;
 	}
