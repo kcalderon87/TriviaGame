@@ -1,8 +1,44 @@
 $(document).ready(function() {
 
+var number = 60;
+var arrayCounter = 0;
+
+var run = function() {
+	counter = setInterval(decrement, 1000);
+}
+
+
+function decrement() {
+	number--;
+	$('#show-number').html('<h2>' + number + '<h2>');
+
+	if (number === 0) {
+		stop();
+		$('#show-number').html("<h3>Game Over</h3>");
+        showResults();
+
+	}
+}
+
+function stop() {
+	clearInterval(counter);
+}
+
+// run();
+
+//Start button
+function startButton() {
+	// $('#startGame').on('click', function(e) {
+
+    run();
+    showQuestion();
+    $('#startGame').hide();
+	// });
+}
+
 	var questions = [{
 		question: "What was the first thing God created?",
-		choices: [" Anmals", " Man", " Heavens and Earth"],
+		choices: [" Animals", " Man", " Heaven and Earth"],
 		correctAnswer: 2
 	}, 	{
 		question: "Noah took how many animals on the ark?",
@@ -20,14 +56,25 @@ $(document).ready(function() {
 		question: "What was Jesus' trade?",
 		choices: [" Blacksmith", " Carpenter", " Plumber"],
 		correctAnswer: 1
+
 	}];
+
+	console.log(questions.correctAnswer);
 
 	var questionCounter = 0;
 	var selections = [];
 	var quiz = $("#quiz");
 	var questionClass = $(document).find(".quizContainer > .question");
     var choiceList = $(document).find(".quizContainer > .choiceList");
+	var numCorrect = 0;
+	var inCorrect = 0;
+	var unAnswered = 0;
 
+    function displayNext() {
+    	// check answer
+    	//if correct increase
+    	//if incorrect increase wrong
+    }
 	displayNext();
 
 	$("#next").on("click", function (e) {
@@ -90,6 +137,7 @@ $(document).ready(function() {
           
           $('#prev').hide();
           $('#next').show();
+          $('#restart').hide();
         }
       }else {
         var scoreElem = displayScore();
@@ -97,16 +145,15 @@ $(document).ready(function() {
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
+        $('#restart').show();
       }
     });
   }
 
 	function displayScore() {
 		var score = $("<p>",{id: "question"});
+		stop();
 
-		var numCorrect = 0;
-		var inCorrect = 0;
-		var unAnswered = 0;
 		for (var i = 0; i < selections.length; i++) {
 			if (selections[i] == questions[i].correctAnswer) {
 				(numCorrect++); 
@@ -117,11 +164,32 @@ $(document).ready(function() {
 		score.append("<h3>Correct: " + numCorrect + " <br>Incorrect: " + inCorrect + "<br>Unanswered: " + unAnswered + "</h3");
 
 		return score;
+	
+		if(arrayCounter == questions.length) {
+        	stop();
+        	$('#show-number').html("<h3>Game Over</h3>");
+        	showResults();
+   		
+   		} 
+   			else {
+   			showQuestion();
+    }
+
+
+     $('#restart').click(function(){
+            restartplay();
+ 	});
+
 	}
 
 
 
 
 
-//end of document.ready function
+
+//need to figure out restart button, 
+//start button,
+//make questions disappear when timer runs out, 
+//timer to stop once questions answered,
+//fix score keeping
 })
