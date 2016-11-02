@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-var number = 60;
+var number = 30;
 var arrayCounter = 0;
 
 var run = function() {
@@ -14,6 +14,9 @@ function decrement() {
 
 	if (number === 0) {
 		stop();
+		$( "#quiz").hide();
+		$('#next').hide();
+		$('#restart').show();
 		$('#show-number').html("<h3>Game Over</h3>");
         showResults();
 
@@ -26,13 +29,29 @@ function stop() {
 
 // run();
 
+
+// ==================
+// Button start game
+$( "#buttonStart" ).click(function() {
+	run();
+
+	$( "#quiz").hide();
+
+  $( "#startGame" ).hide( 2000 );
+	$( "#quiz").show( 2000 );
+});
+
+// ==================
+
+
+
 //Start button
 function startButton() {
 	// $('#startGame').on('click', function(e) {
 
     run();
     showQuestion();
-    $('#startGame').hide();
+    $('#startGame').hide('slow');
 	// });
 }
 
@@ -70,11 +89,14 @@ function startButton() {
 	var inCorrect = 0;
 	var unAnswered = 0;
 
-    function displayNext() {
-    	// check answer
-    	//if correct increase
-    	//if incorrect increase wrong
-    }
+	function displayNext() {
+		// check answer
+		//if correct increase
+		if (numCorrect++) {
+		} else if (inCorrect++);
+		else if (unAnswered++);
+		//if incorrect increase wrong
+	}
 	displayNext();
 
 	$("#next").on("click", function (e) {
@@ -122,19 +144,19 @@ function startButton() {
 	function displayNext() {
     quiz.fadeOut(function() {
       $('#question').remove();
-      
+
       if(questionCounter < questions.length){
         var nextQuestion = createQuestionElement(questionCounter);
         quiz.append(nextQuestion).fadeIn();
         if (!(isNaN(selections[questionCounter]))) {
           $('input[value='+selections[questionCounter]+']').prop('checked', true);
         }
-        
+
         // Controls display of 'prev' button
         if(questionCounter === 1){
           $('#prev').show();
         } else if(questionCounter === 0){
-          
+
           $('#prev').hide();
           $('#next').show();
           $('#restart').hide();
@@ -156,7 +178,7 @@ function startButton() {
 
 		for (var i = 0; i < selections.length; i++) {
 			if (selections[i] == questions[i].correctAnswer) {
-				(numCorrect++); 
+				(numCorrect++);
 			} else if (inCorrect++);
 			else if (unAnswered++);
 		}
@@ -164,20 +186,19 @@ function startButton() {
 		score.append("<h3>Correct: " + numCorrect + " <br>Incorrect: " + inCorrect + "<br>Unanswered: " + unAnswered + "</h3");
 
 		return score;
-	
+
 		if(arrayCounter == questions.length) {
         	stop();
         	$('#show-number').html("<h3>Game Over</h3>");
         	showResults();
-   		
-   		} 
+
+   		}
    			else {
    			showQuestion();
     }
 
-
      $('#restart').click(function(){
-            restartplay();
+         location.reload();
  	});
 
 	}
@@ -187,9 +208,9 @@ function startButton() {
 
 
 
-//need to figure out restart button, 
+//need to figure out restart button,
 //start button,
-//make questions disappear when timer runs out, 
-//timer to stop once questions answered,
+//make questions disappear when timer runs out,
+
 //fix score keeping
 })
