@@ -28,7 +28,26 @@ function stop() {
 }
 
 // run();
+$('#quiz').children().hide();
 
+$('#linkwrapper a').click(function(){
+
+    var chosen1 = this.id;
+
+    $('#quiz').children('div').each(function(i) {
+        var i = i+1;
+        if( $("#" + this.id).is(":visible") == false ) {
+            $("#" + this.id).hide(function(){
+                $("#" + chosen1 + "content").show();
+            });
+            return true;
+
+        } else {
+        $("#" + this.id).show();
+        return true;
+        }
+    });
+});
 
 // ==================
 // Button start game
@@ -92,9 +111,17 @@ function startButton() {
 	function displayNext() {
 		// check answer
 		//if correct increase
-		if (numCorrect++) {
-		} else if (inCorrect++);
-		else if (unAnswered++);
+		 $("#correct").on("click", function() {
+                numCorrect++;
+        });
+
+         $(".inCorrect").on("click", function() {
+                inCorrect++;
+        });
+
+         $(".unAnswered").on("click", function() {
+                unAnswered++;
+        });
 		//if incorrect increase wrong
 	}
 	displayNext();
@@ -181,6 +208,7 @@ function startButton() {
 				(numCorrect++);
 			} else if (inCorrect++);
 			else if (unAnswered++);
+
 		}
 
 		score.append("<h3>Correct: " + numCorrect + " <br>Incorrect: " + inCorrect + "<br>Unanswered: " + unAnswered + "</h3");
@@ -204,13 +232,7 @@ function startButton() {
 	}
 
 
-
-
-
-
 //need to figure out restart button,
 //start button,
-//make questions disappear when timer runs out,
-
 //fix score keeping
 })
