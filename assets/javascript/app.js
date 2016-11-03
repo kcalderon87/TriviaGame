@@ -73,7 +73,7 @@ function startButton() {
     $('#startGame').hide('slow');
 	// });
 }
-
+//=======questions=======
 	var questions = [{
 		question: "What was the first thing God created?",
 		choices: [" Animals", " Man", " Heaven and Earth"],
@@ -111,19 +111,13 @@ function startButton() {
 	function displayNext() {
 		// check answer
 		//if correct increase
-		 $("#correct").on("click", function() {
-                numCorrect++;
-        });
-
-         $(".inCorrect").on("click", function() {
-                inCorrect++;
-        });
-
-         $(".unAnswered").on("click", function() {
-                unAnswered++;
-        });
+		 if (numCorrect == true) {
+		 	this.numCorrect = this.numCorrect + 1;
+		 } else (inCorrect == true);
+		 	this.inCorrect = this.inCorrect + 1;
 		//if incorrect increase wrong
 	}
+
 	displayNext();
 
 	$("#next").on("click", function (e) {
@@ -149,7 +143,7 @@ function startButton() {
 
 		return qElement;
 	}
-
+//======radio buttons=====
 	function createRadios(index) {
 		var radioList = $("<ul>");
 		var item;
@@ -167,7 +161,7 @@ function startButton() {
 	function choose() {
 		selections[questionCounter] = +$('input[name="answer"]:checked').val();
 	}
-
+//======questions diplayed=======
 	function displayNext() {
     quiz.fadeOut(function() {
       $('#question').remove();
@@ -198,7 +192,7 @@ function startButton() {
       }
     });
   }
-
+//=====score=====
 	function displayScore() {
 		var score = $("<p>",{id: "question"});
 		stop();
@@ -214,7 +208,7 @@ function startButton() {
 		score.append("<h3>Correct: " + numCorrect + " <br>Incorrect: " + inCorrect + "<br>Unanswered: " + unAnswered + "</h3");
 
 		return score;
-
+//=====timer stop after questions coplete=======
 		if(arrayCounter == questions.length) {
         	stop();
         	$('#show-number').html("<h3>Game Over</h3>");
@@ -225,14 +219,12 @@ function startButton() {
    			showQuestion();
     }
 
-     $('#restart').click(function(){
+	}
+//=====reatart button=======
+	$('#restart').click(function(){
          location.reload();
  	});
 
-	}
-
-
-//need to figure out restart button,
-//start button,
-//fix score keeping
+//start button shows first question (not sure how to hide)
+//need to fix score keeping
 })
